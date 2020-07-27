@@ -9,12 +9,12 @@ PATTERN_PASSWORD = re.compile('^([A-Z]+)([a-zA-Z\d]+)$')
 
 def validation_data(user_response,password_response):
     if PATTERN_USER.search(user_response) == None or PATTERN_PASSWORD.search(password_response) == None:
-        messagebox.showinfo('user',"Credensiales no validas")    
+        messagebox.showinfo('user',"Credenciales no validas")    
     else:
         messagebox.showinfo('user',"Usuario registrado")    
         with open("./docs/nodes.txt","a+") as file:
-            file.write("{}\n".format(user))
             user = User()
+            file.write("{}\n".format(user))
             user.username = user_response
             user.password = password_response
             if not cache_users[:-1]:
@@ -22,4 +22,3 @@ def validation_data(user_response,password_response):
             else:
                 user.id = cache_users[:-1].id + 1
 
-                
