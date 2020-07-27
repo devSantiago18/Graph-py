@@ -4,7 +4,7 @@ except:
     from tkinter import *
 
 from validations import validation_data
-from graph import create_graph
+from graph import Graph
 
 # Constants
 HEIGHT_W = 30
@@ -42,7 +42,6 @@ class Window(Tk):
         btn_submit = Button(frame, text='Submit' , command=self.submit_data )
         btn_submit.place(x=15, y=210,width=WIDTH_W , height=HEIGHT_W)
 
-
         btn_show = Button(frame,text="Show graph",command=create_graph)
         btn_show.place( x=225, y=210, width=170 , height=HEIGHT_W)
 
@@ -51,4 +50,11 @@ class Window(Tk):
         self.user_response.set("")
         self.password_response.set("")
     
+    def create_graph(self):
+        graph = Graph()
+        graph.create_nodes_from_file("./docs/nodes.txt")
+        graph.generate_edges()
+        print(graph)
+        graph.draw()
+
     
