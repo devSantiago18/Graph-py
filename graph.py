@@ -15,7 +15,7 @@ class Graph:
         with open(path,'r') as file:
             for line in file.readlines():
                 if line != "": 
-                    self.nodes.append(line.replace("\n", ""))
+                    self.nodes.append(line.replace("\n", ""))     
         self.graph.add_nodes_from(self.nodes)
     
     def generate_edges(self):
@@ -23,9 +23,9 @@ class Graph:
         i = 0
         while i < len(self.nodes):
             num = randrange(len(nodes))
-            if ran not in random_numbers:
+            if num not in random_numbers:
                 random_numbers.append(num)
-                edge = (self.nodes[i], self.nodes[ran])
+                edge = (self.nodes[i], self.nodes[num])
                 self.graph.add_edge(*edge)
                 i = i + 1
     

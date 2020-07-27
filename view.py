@@ -42,7 +42,7 @@ class Window(Tk):
         btn_submit = Button(frame, text='Submit' , command=self.submit_data )
         btn_submit.place(x=15, y=210,width=WIDTH_W , height=HEIGHT_W)
 
-        btn_show = Button(frame,text="Show graph",command=create_graph)
+        btn_show = Button(frame,text="Show graph",command=self.create_graph)
         btn_show.place( x=225, y=210, width=170 , height=HEIGHT_W)
 
     def submit_data(self):
