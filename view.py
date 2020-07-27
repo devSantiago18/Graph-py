@@ -1,17 +1,14 @@
- 
 try:
     from Tkinter import *
 except:
     from tkinter import *
 
-
 from validations import validation_data
 from graph import create_graph
 
-
+# Constants
 HEIGHT_W = 30
 WIDTH_W = 200
-
 
 class Window(Tk):
     def __init__(self):
@@ -48,7 +45,6 @@ class Window(Tk):
 
         btn_show = Button(frame,text="Show graph",command=create_graph)
         btn_show.place( x=225, y=210, width=170 , height=HEIGHT_W)
-
 
     def submit_data(self):
         validation_data(self.user_response.get(),self.password_response.get())
