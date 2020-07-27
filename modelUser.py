@@ -12,3 +12,7 @@ class User:
                 'id': self.id,
                 'next': self.next
                 }
+
+
+    def __str__(self) -> str:
+        return f'{self.username},{self.password},{self.id},{self.next_node}'
