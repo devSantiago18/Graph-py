@@ -1,9 +1,10 @@
 import re
-import random
-
+from random import randrange
 from modelUser import User
 from tkinter import messagebox
 
+# Constants
+CACHE = list()
 PATTERN_USER = re.compile('^[a-zA-Z\d]{5,}$')
 PATTERN_PASSWORD = re.compile('^([A-Z]+)([a-zA-Z\d]+)$')
 
@@ -14,10 +15,11 @@ def validation_data(user_response, password_response):
         messagebox.showinfo('user',"Usuario registrado")    
         with open("./docs/nodes.txt","a+") as file:
             user = User(user_response, password_response)
-            if not cache_users[:-1]:
-                user.id = random.randrange(1000)
-            else:
-                user.id = cache_users[:-1].id + 1
+            num = randrange(1000)
+            while num in CACHE:
+                num = randrange(1000)
+            user.id = num
+            CACHE.append(num)
             print(user_response)
             print(user)
             file.write("{}\n".format(user.username))
