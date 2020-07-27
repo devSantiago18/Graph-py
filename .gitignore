@@ -1,3 +1,7 @@
-*.swp
+# Configuration folders
+__pycache__/
+.vscode/
 
+# Custom files and folders
+*.swp
 examples/*
