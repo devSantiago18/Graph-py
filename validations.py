@@ -1,4 +1,5 @@
 import re
+import csv
 from random import randrange
 from modelUser import User
 from tkinter import messagebox
@@ -14,13 +15,14 @@ def validation_data(user_response, password_response):
         messagebox.showinfo('user', "Credenciales no válidas")
     else:
         messagebox.showinfo('user', "Usuario registrado")
-        with open("./docs/nodes.txt", "a+") as file:
+        with open("./docs/nodes.csv", "a+") as csvfile:
+            file_writer = csv.writer(csvfile, delimiter=' ')
             user = User(user_response, password_response)
             num = randrange(1000)
             while num in CACHE:
                 num = randrange(1000)
             user.id = num
-            CACHE.append(num)
-            print(user_response)
+            user.next_node = num if not CACHE else CACHE[len(CACHE)-1].id 
+            CACHE.append(user)
             print(user)
-            file.write("{}\n".format(user.username))
+            file_writer.writerow(user.get_data())
