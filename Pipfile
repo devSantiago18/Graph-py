@@ -9,6 +9,8 @@ verify_ssl = true
 numpy = "*"
 networkx = "*"
 matplotlib = "*"
+tkinter = "*"
+python3-tk = "*"
 
 [requires]
 python_version = "3.8"

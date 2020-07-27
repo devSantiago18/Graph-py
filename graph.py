@@ -10,12 +10,10 @@ def create_graph():
     graph = nx.Graph()
     # read file, create nodes 
     nodes = []
-    file = open('nodes.txt','r')
-    for line in file.readlines():
-        if line != "": 
-            nodes.append(line.replace("\n",""))
-    file.close()
-
+    with open('nodes.txt','r') as file:
+        for line in file.readlines():
+            if line != "": 
+                nodes.append(line.replace("\n",""))
     graph.add_nodes_from(nodes)
 
     num_random = []
