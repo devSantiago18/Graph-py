@@ -8,7 +8,6 @@ from random import randrange
 class Graph:
     def __init__(self):
         self.graph = nx.Graph()
-        self.nodes = []
 
     def __str__(self):
         return f"Nodes: {self.graph.nodes()}. Edges: {self.graph.edges()}."
@@ -18,12 +17,11 @@ class Graph:
             reader = csv.reader(file, delimiter=' ')
             for row in reader:
                 user, passw, _id, _next = row
-                self.nodes.append(user)
                 self.graph.add_edge(_id,_next)
-        self.graph.add_nodes_from(self.nodes)
-
+                self.graph.add_node(_id)
 
     def draw(self, path=None):
+        print(self.graph.nodes)
         nx.draw(self.graph)
         # Save as a png file
         # plt.savefig("simple_path.png")
