@@ -13,10 +13,16 @@ PATTERN_PASSWORD = re.compile('^([A-Z]+)([a-zA-Z\d]+)$')
 def init_cache() -> list:
     # Returns a list of saved ids
     cache = []
-    with open(PATH_CSV, mode="r") as csv_file:
-        reader = csv.reader(csv_file, delimiter=',')
-        cache = [row[0] for row in reader]
-    return cache
+    try:
+        with open(PATH_CSV, mode="r") as csv_file:
+            reader = csv.reader(csv_file, delimiter=',')
+            cache = [row[0] for row in reader]
+        return cache
+    except FileNotFoundError:
+        print('file not found')
+        return []
+    except:
+        print('No se fro bro')
 
 
 def validation_data(user_response, password_response):
