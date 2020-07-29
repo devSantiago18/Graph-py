@@ -11,7 +11,7 @@ PATTERN_PASSWORD = re.compile('^([A-Z]+)([a-zA-Z\d]+)$')
 
 
 def init_cache() -> list:
-    # Returns a list of saved ids
+    """ Returns a list of saved ids """
     cache = []
     try:
         with open(PATH_CSV, mode="r") as csv_file:
@@ -21,25 +21,31 @@ def init_cache() -> list:
     except FileNotFoundError:
         print('file not found')
         return []
-    except:
-        print('No se fro bro')
+    except e:
+        print(e)
 
 
-def validation_data(user_response, password_response):
+def validation_data(user_response, password_response) ->None :
+    """ Validates user information """
     if PATTERN_USER.search(user_response) == None or PATTERN_PASSWORD.search(password_response) == None:
         messagebox.showinfo('user', "Credenciales no válidas")
     else:
         messagebox.showinfo('user', "Usuario registrado")
-        cache = init_cache()
-        print(cache)
-        with open(PATH_CSV, mode="a+", newline='') as csvfile:
-            file_writer = csv.writer(csvfile, delimiter=',')
+        saved(user_response,password_response)
+
+
+def saved(user_response, password_response) -> None:
+    """ Saves user information """
+    cache = init_cache()
+    print(cache)
+    with open(PATH_CSV, mode="a+", newline='') as csvfile:
+        file_writer = csv.writer(csvfile, delimiter=',')
+        num_id = randrange(1000)
+        while num_id in cache:
             num_id = randrange(1000)
-            while num_id in cache:
-                num_id = randrange(1000)
-            user = User(num_id, user_response, password_response)
-            if len(cache) > 0:
-                for _ in range(len(cache)):
-                    user.adjacents.append(choice(cache))
-            print(user)
-            file_writer.writerow(user.to_list())
+        user = User(num_id, user_response, password_response)
+        if len(cache) > 0:
+            for _ in range(len(cache)):
+                user.adjacents.append(choice(cache))
+        print(user)
+        file_writer.writerow(user.to_list())

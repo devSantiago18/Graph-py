@@ -26,5 +26,5 @@ class Graph:
         nx.draw(self.graph)
         # Save as a png file
         # plt.savefig("simple_path.png")
-        # Display
+        # display
         plt.show()
