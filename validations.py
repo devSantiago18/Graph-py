@@ -12,10 +12,11 @@ PATTERN_PASSWORD = re.compile('^([A-Z]+)([a-zA-Z\d]+)$')
 
 def _init_cache() -> tuple:
     with open(PATH_CSV, newline='') as csv_file:
-        reader = csv.reader(csv_file, delimiter=' ')
+        reader = csv.reader(csv_file, delimiter=',')
         user = User()
         for row in reader:
-            if row == None:
+            print(row)
+            if row == None or row == []:
                 return ([],[])
             else:
                *_, user.id , _ = row
@@ -28,16 +29,16 @@ def validation_data(user_response, password_response):
         messagebox.showinfo('user', "Credenciales no válidas")
     else:
         messagebox.showinfo('user', "Usuario registrado")
-        CACHE,CACHE_ID = _init_cache()
-        print(CACHE,CACHE_ID)
-        with open(PATH_CSV, "a+") as csvfile:
-            file_writer = csv.writer(csvfile, delimiter=' ')
-            user = User(user_response, password_response)
+        # CACHE,CACHE_ID = _init_cache()
+        # print(CACHE,CACHE_ID)
+        with open(PATH_CSV, mode="a", newline='') as csvfile:
+            file_writer = csv.writer(csvfile, delimiter=',')
+            user = User(1, user_response, password_response)
             num = randrange(1000)
-            while num in CACHE_ID:
-                num = randrange(1000)
-            user.id = num
-            user.next_node = num if not CACHE else CACHE[len(CACHE)-1].id 
-            CACHE.append(user)
+            # while num in CACHE_ID:
+            #     num = randrange(1000)
+            # user.id = num
+            # user.next_node = num if not CACHE else CACHE[len(CACHE)-1].id 
+            # CACHE.append(user)
             print(user)
-            file_writer.writerow(user.get_data())
+            file_writer.writerow(user.to_list())
