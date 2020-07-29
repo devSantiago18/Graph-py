@@ -15,4 +15,7 @@ class User:
         }
 
     def __str__(self) -> str:
-        return f'{self.username},{self.password},{self.id},{self.next_node}'
+        return f'{self.username},{self.password},{self.id}, {self.next_node}'
+
+    def get_data(self) -> list:
+        return [self.username, self.password, self.id, self.next_node]

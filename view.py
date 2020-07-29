@@ -53,7 +53,5 @@ class Window(Tk):
 
     def create_graph(self):
         graph = Graph()
-        graph.create_nodes_from_file("./docs/nodes.txt")
-        graph.generate_edges()
-        print(graph)
+        graph.create_nodes_from_file("./docs/nodes.csv")
         graph.draw()
