@@ -1,6 +1,6 @@
 import re
 import csv
-from random import randrange
+from random import randrange, choice
 from modelUser import User
 from tkinter import messagebox
 
@@ -32,5 +32,8 @@ def validation_data(user_response, password_response):
             while num_id in cache:
                 num_id = randrange(1000)
             user = User(num_id, user_response, password_response)
+            if len(cache) > 0:
+                for _ in range(len(cache)):
+                    user.adjacents.append(choice(cache))
             print(user)
             file_writer.writerow(user.to_list())
