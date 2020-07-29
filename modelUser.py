@@ -12,8 +12,8 @@ class User:
         return f"Username: {self.username}. Password: {self.password}. Adjacents: {self.adjacents}"
 
     def to_list(self) -> list:
-        l = list(self.adjacents)
-        l.insert(0, self.password)
-        l.insert(0, self.username)
-        l.insert(0, self.id)
-        return l
+        l = [self.password, self.username, self.id]
+        result = list(self.adjacents)
+        for element in l:
+            result.insert(0, element)
+        return result
